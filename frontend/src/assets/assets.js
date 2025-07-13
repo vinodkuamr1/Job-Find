@@ -1,7 +1,7 @@
 import logo from './logo.png'
 import hero_bg from './hero-bg.png'
 import profile_img from './avatar.png'
-import microsoft_logo from './Microsoft_logo.svg'
+import microsoft_logo from './microsoft_Logo.svg'
 
 export const assets = {
     logo,
