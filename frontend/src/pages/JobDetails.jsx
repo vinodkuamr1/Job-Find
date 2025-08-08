@@ -80,17 +80,27 @@ const JobDetails = () => {
               <li><strong>Level:</strong> {job.level}</li>
               <li><strong>Deadline:</strong> {new Date(job.deadline).toLocaleDateString()}</li>
             </ul>
-            <Link to={shouldDisableApply ? '#' : `/apply/${job._id}`}>
-              <button
-                className={`mt-6 w-full py-3 font-medium rounded transition ${shouldDisableApply
+            {token ? (
+              <Link to={shouldDisableApply ? '#' : `/apply/${job._id}`}>
+                <button
+                  className={`mt-6 w-full py-3 font-medium rounded transition ${shouldDisableApply
                     ? 'bg-gray-400 cursor-not-allowed text-white'
                     : 'bg-indigo-600 hover:bg-indigo-700 text-white'
-                  }`}
-                disabled={shouldDisableApply}
+                    }`}
+                  disabled={shouldDisableApply}
+                >
+                  {alreadyApplied ? 'Already Applied' : 'Apply Now'}
+                </button>
+              </Link>
+            ) : (
+              <button
+                className="mt-6 w-full py-3 font-medium rounded bg-gray-300 text-gray-600 cursor-not-allowed"
+                disabled
               >
-                {alreadyApplied ? 'Already Applied' : 'Apply Now'}
+                {token ? "Login required" : "Recruiter not enabled to apply job."}
               </button>
-            </Link>
+            )}
+
           </div>
         </div>
       </div>

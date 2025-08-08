@@ -5,6 +5,7 @@ import cors from 'cors'
 import authRouter from './routes/authRoutes.js'
 import jobRouter from './routes/jobRoutes.js'
 import userRouter from './routes/userRoutes.js'
+import companyRouter from './routes/companyRoute.js'
 dotenv.config()
 
 const app = express()
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth',authRouter)
 app.use('/api/job',jobRouter)
 app.use('/api/user',userRouter)
+app.use('/api/company',companyRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

@@ -30,36 +30,49 @@ export const AppProvider = ({ children }) => {
 
   const fatchUserProfile = async () => {
     try {
-      const {data} = await axios.get(backendUrl + '/api/user/profile',{headers:{Authorization:`${token}`}})
-        if(data.success){
-          setUser(data.user)
-        }else{
-          toast.error(data.message);
+      const { data } = await axios.get(backendUrl + '/api/user/profile', { headers: { Authorization: `${token}` } })
+      if (data.success) {
+        setUser(data.user)
+      } else {
+        toast.error(data.message);
 
-        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+  const fatchCompanyData = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + '/api/company/company', { headers: { Authorization: `${cToken}` } })
+      if (data.success) {
+        setRecruiter(data.company)
+      } else {
+        toast.error(data.message);
+
+      }
     } catch (error) {
       toast.error(error.message);
     }
   }
 
-    const fatchJobs = async () => {
-      try {
-        const {data} = await axios.get(backendUrl + '/api/user/get-jobs')
-        if(data.success){
-          setJobs(data.jobs)
-        }else{
-          toast.error(data.message);
+  const fatchJobs = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + '/api/user/get-jobs')
+      if (data.success) {
+        setJobs(data.jobs)
+      } else {
+        toast.error(data.message);
 
-        }
-
-      } catch (error) {
-        toast.error(error.message);
       }
-    }
 
-    useEffect(()=>{
-      fatchJobs()
-    },[])
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fatchJobs()
+  }, [])
 
   useEffect(() => {
     const path = window.location.pathname;
@@ -69,6 +82,7 @@ export const AppProvider = ({ children }) => {
   }, [token, navigate]);
 
   useEffect(() => {
+    if (token) fatchUserProfile()
     localStorage.setItem('token', token);
   }, [token]);
 
@@ -77,11 +91,8 @@ export const AppProvider = ({ children }) => {
   }, [cToken]);
 
   useEffect(() => {
-    if(token) fatchUserProfile()
-  }, []);
-  useEffect(() => {
-    localStorage.setItem('recruiterData', JSON.stringify(recruiter));
-  }, [recruiter]);
+    if (cToken) fatchCompanyData()
+  }, [cToken])
 
   const value = {
     backendUrl,

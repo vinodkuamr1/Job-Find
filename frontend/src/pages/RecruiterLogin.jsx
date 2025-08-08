@@ -40,9 +40,7 @@ const RecruiterAuth = () => {
 
         if (data.success) {
           localStorage.setItem('CToken', data.Ctoken);
-          localStorage.setItem('recruiterData', JSON.stringify(data.company));
           setCToken(data.Ctoken);
-          setRecruiter(data.company);
           navigate('/');
         } else {
           toast.error(data.message);

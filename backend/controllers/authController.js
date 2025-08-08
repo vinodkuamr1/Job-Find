@@ -8,7 +8,7 @@ import streamifier from 'streamifier';
 // --- User Register ---
 export const userRegister = async (req, res) => {
   try {
-    const { name, email, password, profileData } = req.body;
+    const { name, email, password,avatar } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({ success: false, message: 'All fields are required' });
@@ -24,8 +24,8 @@ export const userRegister = async (req, res) => {
     const user = await userModel.create({
       name,
       email,
+      avatar,
       password: hashedPassword,
-      profileData,
     });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -158,7 +158,6 @@ export const recruiterLogin = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Login successful',
       Ctoken,
       company,
     });

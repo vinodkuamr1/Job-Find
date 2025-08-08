@@ -1,7 +1,6 @@
 import express from 'express'
 import { getAllJobsUser, getUserApplyJobs, getUserProfile } from '../controllers/userController.js'
-import { authenticateUser } from '../middlewares/authMiddleware.js'
-
+import { authenticateRecruiter, authenticateUser } from '../middlewares/authMiddleware.js'
 
 const userRouter = express.Router()
 

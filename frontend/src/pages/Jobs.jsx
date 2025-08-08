@@ -72,7 +72,7 @@ const Jobs = () => {
       {/* Layout */}
       <div className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto">
         {/* Sidebar Filter */}
-        {(showFilter || window.innerWidth >= 1024) && (
+        {(showFilter) && (
           <aside className={`w-full lg:w-64 p-6 ${!showFilter ? 'hidden lg:block' : ''}`}>
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter by Category</h3>
             <ul className="space-y-3">

@@ -11,6 +11,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef();
 
+  
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -33,21 +34,12 @@ const Navbar = () => {
       setUser('');
       setRecruiter('');
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
       localStorage.removeItem('CToken');
-      localStorage.removeItem('recruiterData');
     }
   };
 
   return (
     <div className="text-sm text-white w-full">
-      {/* Top Banner */}
-      <div className="text-center font-medium py-2 bg-gradient-to-r from-violet-500 via-[#9938CA] to-[#E0724A]">
-        <p>
-          Exclusive Price Drop! Hurry, <span className="underline underline-offset-2">Offer Ends Soon!</span>
-        </p>
-      </div>
-
       {/* Main Navbar */}
       <nav className="relative h-[70px] flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 bg-white text-gray-900 transition-all shadow-sm">
         {/* Logo */}
@@ -67,8 +59,9 @@ const Navbar = () => {
           {cToken ? (
             <button
               onClick={() => { toggleMobileMenu(), navigate('/dashboard') }}
-              className="hidden md:inline bg-white hover:bg-gray-50 border border-gray-300 ml-20 px-9 py-2 rounded-full active:scale-95 transition-all"
+              className="hidden md:flex items-center gap-1 bg-white hover:bg-gray-50 border border-gray-300 ml-20 px-6 py-2 rounded-full active:scale-95 transition-all"
             >
+              <FaUserTie className="text-indigo-500" />
               Dashboard
             </button>
           ) : (

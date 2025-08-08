@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 const Login = () => {
 
-    const {token,setToken,backendUrl,setUser,navigate} = useAppContext()
+    const {token,setToken,backendUrl,navigate} = useAppContext()
     const [isLogin,setIsLogin] = useState('sign up')
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
@@ -18,11 +18,10 @@ const Login = () => {
             e.preventDefault()
             const { data } = await axios.post(backendUrl + `/api/auth/${isLogin === 'sign up'? 'register' : 'login' }`,{name, email,password})
             if(data.success){
+                console.log(data)
                 navigate('/')
                 setToken(data.token)
                 toast.success(data.message)
-                localStorage.setItem('user',JSON.stringify(data.user))
-                setUser(data.user)
                 localStorage.setItem('token',data.token)
             }else{
                 toast.error(data.message)
